@@ -10,3 +10,4 @@ tests:
     parameters:
       NameOfService: "TaskCat demo"
       KeyName: "django_eb_app"
+      VPCID: "vpc-9fc1d8e5"

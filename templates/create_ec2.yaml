@@ -20,7 +20,10 @@ Parameters:
     Type: String
   KeyName:
     Description: Name of an existing EC2 KeyPair to enable SSH access into the server
-    Type: AWS::EC2::KeyPair::KeyName      
+    Type: AWS::EC2::KeyPair::KeyName
+  VPCID:
+    Description: ID of an existing VPC with a public and a private subnet in the same Availability Zone.
+    Type: AWS::EC2::VPC::Id         
 Resources:
   Ec2Instance:
     Type: AWS::EC2::Instance
@@ -29,8 +32,8 @@ Resources:
       InstanceType: t2.micro
       ImageId: !FindInMap [RegionMap, !Ref "AWS::Region", AMI] 
       KeyName: !Ref KeyName  
-      SecurityGroups: 
-        - !Ref MySecurityGroup       
+      SecurityGroupIds: 
+        - !GetAtt "MySecurityGroup.GroupId"    
       Tags:
         - Key: Name
           Value: !Ref NameOfService   
@@ -38,6 +41,7 @@ Resources:
     Type: 'AWS::EC2::SecurityGroup'
     Properties:
       GroupDescription: Enable SSH access via port 22
+      VpcId: !Ref VPCID
       SecurityGroupIngress:
         - IpProtocol: tcp
           FromPort: 22
