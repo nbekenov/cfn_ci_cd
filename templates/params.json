@@ -1,0 +1,10 @@
+[
+    {
+      "ParameterKey": "NameOfService",
+      "ParameterValue": "Managed by CF"
+    }, 
+    {
+      "ParameterKey": "KeyName",
+      "ParameterValue": "django_eb_app"
+    }
+]
