@@ -8,5 +8,5 @@ tests:
     regions:
     - us-east-1
     parameters:
-      NameOfService: "Managed by CF"
+      NameOfService: "TaskCat demo"
       KeyName: "django_eb_app"
