@@ -32,8 +32,8 @@ Resources:
       InstanceType: t2.micro
       ImageId: !FindInMap [RegionMap, !Ref "AWS::Region", AMI] 
       KeyName: !Ref KeyName  
-      SecurityGroups: 
-        - !Ref MySecurityGroup       
+      SecurityGroupIds: 
+        - !Ref "MySecurityGroup.GroupId"    
       Tags:
         - Key: Name
           Value: !Ref NameOfService   
