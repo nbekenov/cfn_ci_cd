@@ -33,7 +33,7 @@ Resources:
       ImageId: !FindInMap [RegionMap, !Ref "AWS::Region", AMI] 
       KeyName: !Ref KeyName  
       SecurityGroupIds: 
-        - !Ref "MySecurityGroup.GroupId"    
+        - !GetAtt "MySecurityGroup.GroupId"    
       Tags:
         - Key: Name
           Value: !Ref NameOfService   
