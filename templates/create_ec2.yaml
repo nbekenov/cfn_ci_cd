@@ -20,7 +20,10 @@ Parameters:
     Type: String
   KeyName:
     Description: Name of an existing EC2 KeyPair to enable SSH access into the server
-    Type: AWS::EC2::KeyPair::KeyName      
+    Type: AWS::EC2::KeyPair::KeyName
+  VPC_ID:
+    Description: ID of an existing VPC with a public and a private subnet in the same Availability Zone.
+    Type: AWS::EC2::VPC::Id         
 Resources:
   Ec2Instance:
     Type: AWS::EC2::Instance
