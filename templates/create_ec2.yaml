@@ -21,7 +21,7 @@ Parameters:
   KeyName:
     Description: Name of an existing EC2 KeyPair to enable SSH access into the server
     Type: AWS::EC2::KeyPair::KeyName
-  VPC_ID:
+  VPCID:
     Description: ID of an existing VPC with a public and a private subnet in the same Availability Zone.
     Type: AWS::EC2::VPC::Id         
 Resources:
@@ -41,7 +41,7 @@ Resources:
     Type: 'AWS::EC2::SecurityGroup'
     Properties:
       GroupDescription: Enable SSH access via port 22
-      VpcId: !Ref VPC_ID
+      VpcId: !Ref VPCID
       SecurityGroupIngress:
         - IpProtocol: tcp
           FromPort: 22
