@@ -6,8 +6,8 @@ phases:
             python: 3.x
         commands:
             - echo Entered the install phase...
-            - sudo yum update -y
-            - sudo yum install zip gzip tar -y
+            - yum update -y
+            - yum install zip gzip tar -y
     pre_build:
         commands:
             - echo Entered the pre_build phase...
