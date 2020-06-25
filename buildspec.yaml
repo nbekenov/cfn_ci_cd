@@ -41,6 +41,7 @@ phases:
         commands:
             - echo Entered the build phase...
             - echo run linting...
+            - cfn-lint templates/*
             - cfn-lint templates/* > cfn_lint_output.log
             - |
               if $(grep -Fq "E" cfn_lint_output.log)
@@ -52,6 +53,7 @@ phases:
                 exit 0
               fi
             - echo run CFN-Nag to pinpoint security problems
+            - cfn_nag_scan --input-path  templates/*
             - cfn_nag_scan --input-path  templates/* > cfn_nag_scan_output.log
             - |
               if $(grep -Fq "FAIL" cfn_nag_scan_output.log)
