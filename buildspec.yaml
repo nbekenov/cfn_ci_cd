@@ -16,7 +16,7 @@ phases:
             - "export dirname=${PWD##*/}"
             - echo Directory name $dirname
             - cd ..
-            - mv $dirname $PROJECTNAME
+            #mv $dirname $PROJECTNAME
             - ls -la
             - cd $PROJECTNAME
             - echo Force git to use https:// instead of git://
