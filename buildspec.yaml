@@ -8,6 +8,8 @@ phases:
             - echo Entered the install phase...
             - yum update -y
             - yum install zip gzip tar -y
+            - yum install jq git -y -q
+            - gem install cfn-nag
     pre_build:
         commands:
             - echo Entered the pre_build phase...
@@ -38,14 +40,37 @@ phases:
     build:
         commands:
             - echo Entered the build phase...
+            - echo run linting...
+            - cfn-lint templates/* > cfn_lint_output.log
+            - |
+              if $(grep -Fq "E" cfn_lint_output.log)
+              then
+                echo Linting FAILED!
+                exit 1
+              else
+                echo Linting Passed!
+                exit 0
+              fi
+            - echo run CFN-Nag to pinpoint security problems
+            - cfn_nag_scan --input-path  templates/* > cfn_nag_scan_output.log
+            - |
+              if $(grep -Fq "FAIL" cfn_nag_scan_output.log)
+              then
+                echo CFN-Nag security check FAILED!
+                exit 1
+              else
+                echo CFN-Nag security check Passed!
+                exit 0
+              fi
+            - echo run Taskcat tests...
             - taskcat test run -l
             - |
               if $(grep -Fq "CREATE_FAILED" taskcat_outputs/index.html)
               then
-                echo Quickstart FAILED!
+                echo Taskcat check FAILED!
                 exit 1
               else
-                echo Quickstart Passed!
+                echo Taskcat check Passed!
                 exit 0
               fi
     post_build:
