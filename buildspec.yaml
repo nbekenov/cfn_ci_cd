@@ -7,7 +7,6 @@ phases:
         commands:
             - echo Entered the install phase...
             - yum update -y
-            - yum install zip gzip tar -y
             - yum install jq git -y -q
             - gem install cfn-nag
     pre_build:
