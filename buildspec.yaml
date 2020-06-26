@@ -78,3 +78,7 @@ phases:
     post_build:
         commands:
             - echo Build completed on `date`
+artifacts:
+  files:
+    - taskcat_outputs/*
+  name: taskcat-report        
