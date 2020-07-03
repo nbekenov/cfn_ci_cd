@@ -7,6 +7,12 @@ install python env
 run taskcat test
 > taskcat test run 
 
+run lint test
+> cfn-lint templates/*
+
+run CFN-Nag to pinpoint security problems
+> cfn_nag_scan --input-path  templates/*
+
 ## validate template
 aws --profile nurt1asandbox cloudformation validate-template \
     --template-body file://templates/create_ec2.yaml
