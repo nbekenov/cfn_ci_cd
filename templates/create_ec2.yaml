@@ -10,53 +10,20 @@ Mappings:
       AMI: ami-bf5540df
     eu-west-1:
       AMI: ami-3bfab942
-    ap-southeast-1:
-      AMI: ami-e2adf99e
-    ap-southeast-2:
-      AMI: ami-43874721
 Parameters:
   NameOfService:
     Description: "The name of the service this stack is to be used for"
-    Type: String
-  KeyName:
-    Description: Name of an existing EC2 KeyPair to enable SSH access into the server
-    Type: AWS::EC2::KeyPair::KeyName
-  VPCID:
-    Description: ID of an existing VPC with a public and a private subnet in the same Availability Zone.
-    Type: AWS::EC2::VPC::Id         
+    Type: String      
 Resources:
   Ec2Instance:
     Type: AWS::EC2::Instance
     #UpdateReplacePolicy: Retain
     Properties:
       InstanceType: t2.micro
-      ImageId: !FindInMap [RegionMap, !Ref "AWS::Region", AMI] 
-      KeyName: !Ref KeyName  
-      SecurityGroupIds: 
-        - !GetAtt "MySecurityGroup.GroupId"    
+      ImageId: !FindInMap [RegionMap, !Ref "AWS::Region", AMI]     
       Tags:
         - Key: Name
           Value: !Ref NameOfService   
-  MySecurityGroup:
-    Type: 'AWS::EC2::SecurityGroup'
-    Properties:
-      GroupDescription: Enable SSH access via port 22
-      VpcId: !Ref VPCID
-      SecurityGroupIngress:
-        - IpProtocol: tcp
-          FromPort: 22
-          ToPort: 22
-          CidrIp: 0.0.0.0/0
-          Description: access to all
-      SecurityGroupEgress:
-        - IpProtocol: tcp
-          FromPort: 80
-          ToPort: 80
-          CidrIp: 0.0.0.0/0
-          Description: access to the internet    
-      Tags: 
-        - Key: AppName
-          Value: SAS
 Outputs: 
   TestOutput: 
     Description: Return the name of the AMI ID that matches the region and environment type keys
