@@ -1,7 +1,7 @@
 # cfn_ci_cd
 CloudFormation CI/CD pipeline.
 
-After successfull build all changes in dev branch will be merged into `master` branch.
+Full description of implementation can be found in the Medium website on the following [Link](https://medium.com/@nursultanbekenov/awsome-devops-projects-validation-pipeline-for-cloudformation-templates-d26ae5416078)
 
 ## Requirements
 
