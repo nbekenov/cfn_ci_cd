@@ -4,7 +4,7 @@ aws-sam-translator==1.25.0
 backports.shutil-get-terminal-size==1.0.0
 boto3==1.14.9
 botocore==1.17.9
-certifi==2020.6.20
+certifi==2022.12.7
 cfn-lint==0.33.1
 chardet==3.0.4
 dataclasses-jsonschema==2.12.0
